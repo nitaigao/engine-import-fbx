@@ -1,18 +1,10 @@
-//
-//  main.cpp
-//  fbx
-//
-//  Created by Nicholas Kostelnik on 28/07/2011.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
-//
-
 #include <iostream>
 
-int main (int argc, const char * argv[])
-{
+#include "fbx_json_serializer.h"
 
-  // insert code here...
-  std::cout << "Hello, World!\n";
-    return 0;
+int main (int argc, const char * argv[]) {
+  const char* input_filename = "/Users/nk/Desktop/untitled.fbx";
+  const char* output_filename = "/Users/nk/Desktop/untitled.json";
+  FBXJSONSerializer serializer;
+  serializer.serialize(input_filename, output_filename);
 }
-
