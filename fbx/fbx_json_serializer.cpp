@@ -80,14 +80,32 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
         json_mesh["rotation"] = json_mesh_rotation;
       }
       {
-        
         int material_count = fbx_node->GetMaterialCount(); 
         Array json_mesh_materials;
         
         for (int material_index = 0; material_index < material_count; material_index++) {
           KFbxSurfaceMaterial* surface_material = fbx_node->GetMaterial(material_index);
           
-          Object material;
+          Object json_material;
+          
+          Array json_textures;
+          int textureIndex = 0;
+          FOR_EACH_TEXTURE(textureIndex) {
+            KFbxProperty property = surface_material->FindProperty(KFbxLayerElement::TEXTURE_CHANNEL_NAMES[textureIndex]);
+            int layered_texture_count = property.GetSrcObjectCount(KFbxTexture::ClassId);
+            for (int layered_texture_index = 0; layered_texture_index < layered_texture_count; ++layered_texture_index) {
+              KFbxTexture* texture = KFbxCast <KFbxTexture> (property.GetSrcObject(KFbxTexture::ClassId, layered_texture_index));
+              if(texture) {
+                KFbxFileTexture *file_texture = KFbxCast<KFbxFileTexture>(texture);
+                if (file_texture) {
+                  Object json_texture;
+                  json_texture["filename"] = String(file_texture->GetFileName());
+                  json_textures.Insert(json_texture);
+                }               
+              }
+            }
+          }
+          json_material["textures"] = json_textures;
           
           KFbxSurfaceLambert* lambert_material = KFbxCast<KFbxSurfaceLambert>(surface_material);
           
@@ -99,7 +117,7 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
             diffuse["g"] = Number(diffuse_g);
             double diffuse_b = lambert_material->Diffuse.Get()[2];
             diffuse["b"] = Number(diffuse_b);
-            material["diffuse"] = diffuse;
+            json_material["diffuse"] = diffuse;
 
             Object ambient;
             double ambient_r = lambert_material->Ambient.Get()[0];
@@ -108,7 +126,7 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
             ambient["g"] = Number(ambient_g);
             double ambient_b = lambert_material->Ambient.Get()[2];
             ambient["b"] = Number(ambient_b);
-            material["ambient"] = ambient;
+            json_material["ambient"] = ambient;
             
             KFbxProperty specular_property = lambert_material->FindProperty("SpecularColor");
             fbxDouble3 specular_data;
@@ -120,10 +138,10 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
             specular["g"] = Number(specular_g);
             float specular_b = specular_data[2];
             specular["b"] = Number(specular_b);
-            material["specular"] = specular;            
+            json_material["specular"] = specular;            
           }
           
-          json_mesh_materials.Insert(material);
+          json_mesh_materials.Insert(json_material);
         }
         json_mesh["materials"] = json_mesh_materials;
       }
