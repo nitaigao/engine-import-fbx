@@ -52,16 +52,31 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
       Object json_mesh;
       {
         Array json_mesh_vertices;
+        Array json_mesh_normals;
+        KFbxGeometryElementNormal* normalElement = mesh->GetElementNormal();
         for (int poly_index = 0; poly_index < mesh->GetPolygonCount(); poly_index++) {
           for (int vertex_index = 0; vertex_index < 3; vertex_index++) {
             int vertex_position = mesh->GetPolygonVertex(poly_index, vertex_index);
+            
             KFbxVector4 vertex = mesh->GetControlPoints()[vertex_position];
-            Number x = vertex.GetAt(0); json_mesh_vertices.Insert(x);
-            Number y = vertex.GetAt(1); json_mesh_vertices.Insert(y);
-            Number z = vertex.GetAt(2); json_mesh_vertices.Insert(z);
+            Number vertex_x = vertex.GetAt(0); json_mesh_vertices.Insert(vertex_x);
+            Number vertex_y = vertex.GetAt(1); json_mesh_vertices.Insert(vertex_y);
+            Number vertex_z = vertex.GetAt(2); json_mesh_vertices.Insert(vertex_z);
+            
+            KFbxVector4 normal = normalElement->GetDirectArray()[vertex_position];
+            Number normal_x = normal.GetAt(0); json_mesh_normals.Insert(normal_x);
+            Number normal_y = normal.GetAt(1); json_mesh_normals.Insert(normal_y);
+            Number normal_z = normal.GetAt(2); json_mesh_normals.Insert(normal_z);
           }
         }
         json_mesh["vertices"] = json_mesh_vertices;
+        json_mesh["normals"] = json_mesh_normals;
+      }
+      {
+        KFbxGeometryElementNormal* normalElement = mesh->GetElementNormal();
+        if (normalElement) {
+          
+        }
       }
       {
         fbxDouble3 translation = fbx_node->LclTranslation.Get();
