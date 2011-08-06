@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4C256E7B13EDB9A60013389D /* libboost_filesystem-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C256E7A13EDB9A60013389D /* libboost_filesystem-mt.dylib */; };
+		4C256E7D13EDB9BD0013389D /* libboost_system-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C256E7C13EDB9BD0013389D /* libboost_system-mt.dylib */; };
 		4C84B8DE13E409C400714501 /* fbx_json_serializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C84B8DD13E409C400714501 /* fbx_json_serializer.cpp */; };
 		4C8B803413E219B600355E6B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4C8B803313E219B600355E6B /* main.cpp */; };
 		4C8B803613E219B600355E6B /* fbx.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4C8B803513E219B600355E6B /* fbx.1 */; };
@@ -30,6 +32,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4C256E7A13EDB9A60013389D /* libboost_filesystem-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_filesystem-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.47.0/lib/libboost_filesystem-mt.dylib"; sourceTree = "<group>"; };
+		4C256E7C13EDB9BD0013389D /* libboost_system-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_system-mt.dylib"; path = "../../../../../usr/local/Cellar/boost/1.47.0/lib/libboost_system-mt.dylib"; sourceTree = "<group>"; };
 		4C84B8DB13E408E900714501 /* fbx_json_serializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fbx_json_serializer.h; sourceTree = "<group>"; };
 		4C84B8DD13E409C400714501 /* fbx_json_serializer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fbx_json_serializer.cpp; sourceTree = "<group>"; };
 		4C8B802F13E219B600355E6B /* fbx */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fbx; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +50,6 @@
 		4CD7634413E21B98007F055B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4CD7634713E21BBD007F055B /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		4CD7634913E21BD8007F055B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		4CD7634B13E21C5F007F055B /* fbxutils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fbxutils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 				4CD7634813E21BBD007F055B /* Cocoa.framework in Frameworks */,
 				4CD7634513E21B98007F055B /* Foundation.framework in Frameworks */,
 				4C8B803D13E21A4800355E6B /* libfbxsdk-2012.1-staticd.a in Frameworks */,
+				4C256E7B13EDB9A60013389D /* libboost_filesystem-mt.dylib in Frameworks */,
+				4C256E7D13EDB9BD0013389D /* libboost_system-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,10 +72,7 @@
 		4C8B802413E219B600355E6B = {
 			isa = PBXGroup;
 			children = (
-				4CD7634913E21BD8007F055B /* SystemConfiguration.framework */,
-				4CD7634713E21BBD007F055B /* Cocoa.framework */,
-				4CD7634413E21B98007F055B /* Foundation.framework */,
-				4C8B803C13E21A4800355E6B /* libfbxsdk-2012.1-staticd.a */,
+				4CA751D413EDB1E700D1D9D7 /* libs */,
 				4C8B803213E219B600355E6B /* fbx */,
 				4C8B803013E219B600355E6B /* Products */,
 			);
@@ -90,11 +92,23 @@
 				4CB3B52A13E4084C00484AE6 /* json */,
 				4C8B803313E219B600355E6B /* main.cpp */,
 				4C8B803513E219B600355E6B /* fbx.1 */,
-				4CD7634B13E21C5F007F055B /* fbxutils.h */,
 				4C84B8DB13E408E900714501 /* fbx_json_serializer.h */,
 				4C84B8DD13E409C400714501 /* fbx_json_serializer.cpp */,
 			);
 			path = fbx;
+			sourceTree = "<group>";
+		};
+		4CA751D413EDB1E700D1D9D7 /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				4C256E7C13EDB9BD0013389D /* libboost_system-mt.dylib */,
+				4C256E7A13EDB9A60013389D /* libboost_filesystem-mt.dylib */,
+				4CD7634913E21BD8007F055B /* SystemConfiguration.framework */,
+				4CD7634713E21BBD007F055B /* Cocoa.framework */,
+				4CD7634413E21B98007F055B /* Foundation.framework */,
+				4C8B803C13E21A4800355E6B /* libfbxsdk-2012.1-staticd.a */,
+			);
+			name = libs;
 			sourceTree = "<group>";
 		};
 		4CB3B52A13E4084C00484AE6 /* json */ = {
@@ -217,8 +231,18 @@
 		4C8B803A13E219B600355E6B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Applications/Autodesk/FBXSDK20121/include;
-				LIBRARY_SEARCH_PATHS = /Applications/Autodesk/FBXSDK20121/lib/gcc4/ub;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Applications/Autodesk/FBXSDK20121/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/Applications/Autodesk/FBXSDK20121/lib/gcc4/ub,
+					/usr/local/Cellar/boost/1.47.0/lib,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-lboost_filesystem-mt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -226,8 +250,18 @@
 		4C8B803B13E219B600355E6B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				HEADER_SEARCH_PATHS = /Applications/Autodesk/FBXSDK20121/include;
-				LIBRARY_SEARCH_PATHS = /Applications/Autodesk/FBXSDK20121/lib/gcc4/ub;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/Applications/Autodesk/FBXSDK20121/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib,
+					/Applications/Autodesk/FBXSDK20121/lib/gcc4/ub,
+					/usr/local/Cellar/boost/1.47.0/lib,
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-lboost_filesystem-mt";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

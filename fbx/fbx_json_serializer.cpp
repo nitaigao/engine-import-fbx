@@ -8,10 +8,6 @@
 #include "json/writer.h"
 using namespace json;
 
-FBXJSONSerializer::FBXJSONSerializer() {
-  
-}
-
 void FBXJSONSerializer::serialize(const char *input_filename, const char *output_filename) {
   KFbxSdkManager* manager = KFbxSdkManager::Create();
 
@@ -73,10 +69,12 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
         json_mesh["normals"] = json_mesh_normals;
       }
       {
-        KFbxGeometryElementNormal* normalElement = mesh->GetElementNormal();
-        if (normalElement) {
-          
-        }
+        fbxDouble3 scale = fbx_node->LclScaling.Get();
+        Object json_mesh_scale;
+        json_mesh_scale["x"] = Number(scale[0]);
+        json_mesh_scale["y"] = Number(scale[1]);
+        json_mesh_scale["z"] = Number(scale[2]);
+        json_mesh["scale"] = json_mesh_scale;
       }
       {
         fbxDouble3 translation = fbx_node->LclTranslation.Get();
@@ -160,7 +158,8 @@ void FBXJSONSerializer::recurse_over_model(fbxsdk_2012_1::KFbxNode *fbx_node, js
         }
         json_mesh["materials"] = json_mesh_materials;
       }
-      json_mesh["stride"] = Number(3);
+      json_mesh["vertex_stride"] = Number(3);
+      json_mesh["normal_stride"] = Number(3);
       meshes_array.Insert(json_mesh);
     }
     

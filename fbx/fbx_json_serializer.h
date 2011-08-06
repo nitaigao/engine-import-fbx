@@ -9,8 +9,6 @@ class FBXJSONSerializer {
   
 public:
   
-  FBXJSONSerializer();
-  
   void serialize(const char* input_filename, const char* output_filename);
   
 private:
