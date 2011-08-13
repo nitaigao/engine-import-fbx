@@ -6,14 +6,11 @@
 using namespace boost::filesystem;
 
 int main (int argc, const char * argv[]) {
-  directory_iterator end_itr;
-  for (directory_iterator itr("/Users/nk/Desktop/fbx"); itr != end_itr; ++itr) {
-    if (extension(itr->path()) == ".fbx") {
-      create_directory("/Users/nk/Desktop/compiled");
-      path output_name = std::string("/Users/nk/Desktop/compiled/") + basename(itr->path()) + std::string(".json");
+  std::string input_file = argv[1];
+  std::string output_file = argv[2];
+  
+  std::clog << input_file << " to " << output_file << std::endl;
     
-      FBXJSONSerializer serializer;
-      serializer.serialize(itr->path().string().c_str(), output_name.string().c_str());
-    }
-  }
+  FBXJSONSerializer serializer;
+  serializer.serialize(input_file, output_file);
 }
